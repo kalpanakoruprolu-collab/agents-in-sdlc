@@ -1,9 +1,9 @@
 ---
-title: "Lección 8 - Crear y combinar la PR de la funcionalidad"
-description: "Revisa conjuntamente el filtrado, las instrucciones, la actualización de la habilidad, el perfil QA y las pruebas; después, crea una PR y utiliza Agent Merge."
+title: "Lección 8 - Crear y combinar la solicitud de incorporación de cambios (PR) de la funcionalidad"
+description: "Revisa conjuntamente el filtrado, las instrucciones, la actualización de la habilidad, el perfil de control de calidad (QA) y las pruebas; después, crea una solicitud de incorporación de cambios y utiliza Agent Merge."
 authors:
   - geektrainer
-lastUpdated: 2026-09-17
+lastUpdated: 2026-10-22
 ---
 
 La implementación del filtrado, las actualizaciones de instrucciones y de la habilidad, el perfil de control de calidad (QA) y las pruebas están guardados en una sola rama. Es hora de revisarlos juntos y abrir una solicitud de incorporación de cambios. Ya has combinado personalmente la solicitud de incorporación de cambios (PR) de valoraciones por estrellas; esta vez permitirás que **Agent Merge** gestione el proceso.
@@ -23,32 +23,40 @@ A lo largo del flujo de filtrado, has utilizado Copilot para planificar, impleme
 
 ## Introducción a Agent Merge
 
-**Agent Merge** permite automatizar el último tramo de la incorporación de una solicitud de cambios mediante la aplicación Copilot. Al habilitarlo, la sesión de la aplicación lee la solicitud y resuelve lo que la bloquea: corrige comprobaciones de CI con errores, responde a comentarios de revisión y reorganiza la base cuando es necesario. Después la combina en cuanto GitHub lo permite. Se ejecuta en segundo plano, continúa tras reiniciar la aplicación y se desactiva cuando se combina la solicitud.
+**Agent Merge** permite automatizar las tareas pendientes para integrar una solicitud de incorporación de cambios mediante la aplicación Copilot. Al habilitarlo, la sesión de la aplicación lee la solicitud y resuelve lo que la bloquea: corrige comprobaciones de integración continua (CI) con errores, responde a comentarios de revisión y actualiza la rama mediante rebase cuando es necesario. Después la combina en cuanto GitHub lo permite. Se ejecuta en segundo plano, continúa tras reiniciar la aplicación y se desactiva cuando se combina la solicitud.
 
 Hasta ahora has seleccionado **Merge pull request** personalmente. Agent Merge puede asumir esa responsabilidad, pero su capacidad de editar código y combinar sigue necesitando tu autorización explícita. Revisa sus acciones permitidas y el trabajo antes de conceder permiso para combinar.
 
 ## Utilizar Agent Merge para gestionar la PR
 
-Con todo el código creado y revisado, permitamos que Agent Merge gestione el proceso de PR.
+Con todo el código creado y revisado, vamos a permitir que Agent Merge gestione el proceso de la solicitud de incorporación de cambios.
 
 1. Utiliza el selector de agentes para seleccionar **Default agent**.
 2. Selecciona el menú desplegable junto a **Create PR**.
-3. Selecciona **Agent merge**. El botón cambia a **Agent merge**.
-4. Selecciona **Agent merge** para iniciar el proceso.
+3. Selecciona **Agent Merge**. El botón cambia a **Agent Merge**.
+4. Selecciona el botón **Agent Merge** para iniciar el proceso. Elegir la opción del menú desplegable por sí sola no inicia el proceso.
 
 El proceso de Agent Merge comienza. Hará lo siguiente:
 
 - Crear la solicitud de incorporación de cambios con un título y una descripción.
 - Si iniciaste la sesión desde una incidencia, incluir una referencia a ella en el cuerpo de la descripción.
-- Reorganizar la base o gestionar posibles conflictos de combinación con la rama de destino.
+- Actualizar la rama mediante rebase o gestionar posibles conflictos de combinación con la rama de destino.
 - Supervisar el proceso de CI para garantizar que se superen todas las comprobaciones.
 - Supervisar la PR para detectar comentarios de otros desarrolladores o de la revisión de código de Copilot. Realizará actualizaciones para resolverlos.
 - De forma opcional, combinar automáticamente la PR cuando todo se haya completado correctamente.
 
 Permitamos que Agent Merge también combine la PR cuando se supere todo.
 
-5. Selecciona el menú desplegable junto a **Agent merge**.
-6. Comprueba que **Merge pull request** está marcado.
+5. Revisa las diferencias de la solicitud de incorporación de cambios y las pruebas de verificación antes de conceder permiso para combinar.
+6. Selecciona el menú desplegable junto a **Agent Merge**.
+7. Comprueba que **Merge pull request** está marcado.
+8. Pide explícitamente al agente que combine la solicitud:
+
+    ```plaintext
+    Merge the PR once all required checks and approvals pass. Do not bypass repository protections.
+    ```
+
+9. Sigue el progreso y resuelve los bloqueos que se indiquen. Antes de continuar, confirma que el estado de la solicitud de incorporación de cambios es **Merged**; tener habilitado el permiso de combinación o un agente en ejecución no confirma que la combinación haya finalizado.
 
 > [!IMPORTANT]
 > Agent Merge no elude las protecciones del repositorio ni los permisos ausentes. Resuelve esos bloqueos antes de continuar.
